@@ -174,7 +174,7 @@
 							class="img-fluid"
 							alt="img-pdf-file"
 						/>
-          <button type="button" class="btn btn-success">Enviar</button>
+            <button type="button" class="btn btn-success">Enviar</button>
 					</div>
 					<div class="col">
 						<div class="card-header">Ubicación de la prueba</div>
