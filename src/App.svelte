@@ -201,10 +201,10 @@
 						</div>
 					</div>
 				</div>
-          <button type="button" class="btn btn-success">Enviar</button>
-			  </div>
 			</div>
 		</div>
+	</div>
+    <button type="button" class="btn btn-success">Enviar</button>
 	</div>
 
   <!--creamos un if para comprobar si se muestran cosas-->
