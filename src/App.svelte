@@ -174,8 +174,6 @@
 							class="img-fluid"
 							alt="img-pdf-file"
 						/>
-            <button type="button" class="btn btn-success">Enviar</button>
-					</div>
 					<div class="col">
 						<div class="card-header">Ubicación de la prueba</div>
 						<br>
@@ -204,6 +202,8 @@
 					</div>
 				</div>
 			</div>
+          <button type="button" class="btn btn-success">Enviar</button>
+				</div>
 		</div>
 	</div>
 
