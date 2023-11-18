@@ -175,6 +175,7 @@
 							alt="img-pdf-file"
 						/>
 					</div>
+          <button type="button" class="btn btn-success">Enviar</button>
 					<div class="col">
 						<div class="card-header">Ubicación de la prueba</div>
 						<br>
@@ -214,6 +215,8 @@
   {#if showModal}
     <ModalParticipantes on:close={handleModalClose} />
   {/if}
+
+  
 </main>
 
 <style>
