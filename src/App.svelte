@@ -139,8 +139,8 @@
 
 					<div class="col">
 						<div class="card-header">Subir archivo</div>
-						<br>
-						<div class="mb-3">
+						  <br>
+						  <div class="mb-3">
 							<label for="formFile" class="form-label"
 								>Por favor suba el archivo de la prueba</label
 							>
@@ -165,6 +165,7 @@
 									or drag and drop them here
 								</div>
 							</div>
+						</div>
 						</div>
 						<br />
 						<p>Su archivo es</p>
