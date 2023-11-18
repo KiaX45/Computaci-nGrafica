@@ -82,101 +82,129 @@
 </script>
 
 <main>
-  <div class="card bg-light">
-    <div class="card-body">
-      <h5 class="card-title">Planeación Simulcaro Prueba Saber Pro</h5>
-      <br />
-      <div class="container text-center">
-        <div class="row">
-          <div class="col" style="align-items: center;">
-            <h1>Ajustar Fecha y Hora del Simulacro</h1>
-            <br />
-            <div class="form-check form-switch">
-              <div class="container">
-                <div class="row">
-                  <div class="col">
-                    <input
-                      type="date"
-                      bind:value={fecha}
-                      class="form-control"
-                    />
-                  </div>
-                  <div class="col">
-                    <input type="time" bind:value={hora} class="form-control" />
-                  </div>
-                  <div class="col">
-                    <br />
-                    <button
-                      class="btn btn-success"
-                      on:click={confirmarFechaHora}>Confirmar</button
-                    >
-                    <br />
-                  </div>
-                </div>
-              </div>
-              <br />
-              <div class="app-checkbox">
-                <label class="app-checkbox__label">
-                  <input
-                    type="checkbox"
-                    class="app-checkbox__input"
-                    bind:checked={enviarNotificacion}
-                  />
-                  ¿Enviar correo de notificación a los interesados?
-                </label>
-              </div>
-              <br />
-              <div class="app-participants" style="align-items: center;">
-                <button
-                  class="btn btn-outline-success app-button--add-participant"
-                  on:click={toggleModal}
-                >
-                  <span class="app-button__icon">+</span> Adicionar participantes
-                </button>
-              </div>
-            </div>
-            <br />
-          </div>
-          <div class="col">
-            <div class="mb-3">
-              <label for="formFile" class="form-label"
-                >Por favor suba el archivo de la prueba</label
-              >
-              <div
-                class="app-upload__container"
-                on:drop={handleDrop}
-                on:dragover={preventDefault}
-                on:dragenter={preventDefault}
-              >
-                <input
-                  type="file"
-                  id="fileInput"
-                  multiple
-                  on:change={handleFiles}
-                  class="app-upload__input"
-                />
-                <label for="fileInput" class="app-upload__label">
-                  <div class="app-upload__icon">🌥️</div>
-                  Choose files to Upload
-                </label>
-                <div class="app-upload__drag-text">
-                  or drag and drop them here
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <div id="map" style="height: 350px;" />
-            <div class="info-panel">
-              <p>
-                Preview de la locación señalada disponible para ser cambiada
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <h5 class="card-title">Planeación Simulcaro Prueba Saber Pro</h5>
+	<div class="card bg-light">
+		<div class="card-body">
+			<div class="container text-center">
+				<div class="row">
+					<div class="col" style="align-items: center;">
+						<div class="card-header">Ajustar Fecha y Hora</div>
+						<br />
+						<div class="form-check form-switch">
+							<div class="container">
+								<div class="row">
+									<div class="col">
+										<input
+											type="date"
+											bind:value={fecha}
+											class="form-control"
+										/>
+									</div>
+									<div class="col">
+										<input type="time" bind:value={hora} class="form-control" />
+									</div>
+									<div class="col">
+										<br />
+										<button
+											class="btn btn-success"
+											on:click={confirmarFechaHora}>Confirmar</button
+										>
+										<br />
+									</div>
+								</div>
+							</div>
+							<br />
+							<div class="app-checkbox">
+								<label class="app-checkbox__label">
+									<input
+										type="checkbox"
+										class="app-checkbox__input"
+										bind:checked={enviarNotificacion}
+									/>
+									¿Enviar correo de notificación a los interesados?
+								</label>
+							</div>
+							<br />
+							<div class="app-participants" style="align-items: center;">
+								<button
+									class="btn btn-outline-success app-button--add-participant"
+									on:click={toggleModal}
+								>
+									<span class="app-button__icon">+</span> Adicionar participantes
+								</button>
+							</div>
+						</div>
+						<br />
+					</div>
+
+					<div class="col">
+						<div class="card-header">Subir archivo</div>
+						<br>
+						<div class="mb-3">
+							<label for="formFile" class="form-label"
+								>Por favor suba el archivo de la prueba</label
+							>
+							<div
+								class="app-upload__container"
+								on:drop={handleDrop}
+								on:dragover={preventDefault}
+								on:dragenter={preventDefault}
+							>
+								<input
+									type="file"
+									id="fileInput"
+									multiple
+									on:change={handleFiles}
+									class="app-upload__input"
+								/>
+								<label for="fileInput" class="app-upload__label">
+									<div class="app-upload__icon">🌥️</div>
+									Choose files to Upload
+								</label>
+								<div class="app-upload__drag-text">
+									or drag and drop them here
+								</div>
+							</div>
+						</div>
+						<br />
+						<p>Su archivo es</p>
+						<img
+							src="https://cdn-icons-png.flaticon.com/512/80/80942.png"
+							style="height: 250px;"
+							class="img-fluid"
+							alt="img-pdf-file"
+						/>
+					</div>
+					<div class="col">
+						<div class="card-header">Ubicación de la prueba</div>
+						<br>
+						<div id="map" style="height: 350px;" />
+						<div class="info-panel">
+							<p>
+								Preview de la locación señalada disponible para ser cambiada
+							</p>
+							<div class="input-group mb-3">
+								<span class="input-group-text">
+									<div class="app-upload__icon">ℹ️</div>
+								</span>
+								<div class="form-floating">
+									<input
+										type="text"
+										class="form-control"
+										id="floatingInputGroup1"
+										placeholder="Username"
+									/>
+									<label for="floatingInputGroup1"
+										>Detalles de la ubicación
+									</label>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
   <!--creamos un if para comprobar si se muestran cosas-->
   {#if modalVisible}
@@ -206,7 +234,6 @@
   }
 
   .app-button--add-participant {
-    display: flex;
     align-items: center;
     gap: 0.5rem;
   }
