@@ -54,6 +54,7 @@
           </div>
           <!-- Botón para enviar el formulario -->
           <button type="submit" class="btn btn-success">Enviar</button>
+          <button type="submit" class="btn btn-danger">Enviar</button>
         </form>
       </div>
     </div>
@@ -78,7 +79,5 @@
     opacity: 0.5;
   }
 
-  .btn {
-    background-color: #519259;
-  }
+  
 </style>
