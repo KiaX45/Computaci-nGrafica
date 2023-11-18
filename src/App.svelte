@@ -1,4 +1,9 @@
 <script>
+  import L from 'leaflet';
+  import 'leaflet/dist/leaflet.css';
+  import { onMount } from 'svelte';	
+
+
   let fecha = '';
   let hora = '';
 
@@ -34,6 +39,31 @@
   function preventDefault(event) {
     event.preventDefault();
   }
+
+
+  let map;
+  let marker;
+
+    // Las coordenadas de la ubicación que quieres mostrar
+   const location = { lat: 1.21458, lng: -77.27812 }; 
+
+  // Se ejecuta en el montaje del componente
+  onMount(() => {
+    map = L.map('map').setView([location.lat, location.lng], 13);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+
+    map.on('click', function(e) {
+      let coord = e.latlng;
+      let lat = coord.lat;
+      let lng = coord.lng;
+      if (marker) marker.remove();
+      marker = L.marker([lat, lng]).addTo(map);
+      // Aquí puedes actualizar un store o una variable reactiva con la ubicación
+    });
+  });
 
 
 </script>
@@ -115,6 +145,12 @@
 </div>
 
 
+<div id="map" style="height: 400px;"></div>
+<div class="info-panel">
+  <p>Preview de la locación señalada disponible para ser cambiada</p>
+</div>
+
+
 <style>
 	/* Prefijo de espacio de nombres 'app-' */
 .app-checkbox__label {
@@ -184,6 +220,14 @@
   font-size: 0.8rem;
   margin-top: 10px;
 }
+
+/*Estilos del mapa*/
+#map {
+      height: 400px;
+    }
+    .info-panel {
+      margin-top: 10px;
+    }
 
 
 

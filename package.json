@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "bootstrap": "^5.3.2",
+    "leaflet": "^1.9.4",
     "sirv-cli": "^2.0.0"
   }
 }
