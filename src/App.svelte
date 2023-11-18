@@ -170,7 +170,7 @@
 						<p>Su archivo es</p>
 						<img
 							src="https://cdn-icons-png.flaticon.com/512/80/80942.png"
-							style="height: 250px;"
+							style="height: 150px;"
 							class="img-fluid"
 							alt="img-pdf-file"
 						/>
