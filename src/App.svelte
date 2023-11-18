@@ -174,6 +174,7 @@
 							class="img-fluid"
 							alt="img-pdf-file"
 						/>
+          </div>  
 					<div class="col">
 						<div class="card-header">Ubicación de la prueba</div>
 						<br>
