@@ -2,7 +2,9 @@
   import L from 'leaflet';
   import 'leaflet/dist/leaflet.css';
   import { onMount } from 'svelte';	
-
+  
+  //importamos el modal 
+  import ModalParticipantes from './components/Forms/ModalParticipantes.svelte';
 
   let fecha = '';
   let hora = '';
@@ -65,6 +67,13 @@
     });
   });
 
+
+  let modalVisible = false;
+
+  function handleModalClose(event) {
+    console.log('Modal cerrado, ¿se guardaron los datos?:', event.detail.saved);
+    modalVisible = false;
+  }
 
 </script>
 
