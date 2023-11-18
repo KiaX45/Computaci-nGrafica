@@ -23,7 +23,7 @@
 
   // Esta función se llama para cerrar el modal sin enviar datos
   function handleClose() {
-    dispatch('closeModal');
+    dispatch('close', formData);
   }
 </script>
 
