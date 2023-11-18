@@ -139,8 +139,8 @@
 
 					<div class="col">
 						<div class="card-header">Subir archivo</div>
-						  <br>
-						  <div class="mb-3">
+						<br>
+						<div class="mb-3">
 							<label for="formFile" class="form-label"
 								>Por favor suba el archivo de la prueba</label
 							>
@@ -166,7 +166,6 @@
 								</div>
 							</div>
 						</div>
-						</div>
 						<br />
 						<p>Su archivo es</p>
 						<img
@@ -175,7 +174,7 @@
 							class="img-fluid"
 							alt="img-pdf-file"
 						/>
-          </div>  
+					</div>
 					<div class="col">
 						<div class="card-header">Ubicación de la prueba</div>
 						<br>
@@ -206,8 +205,6 @@
 			</div>
 		</div>
 	</div>
-</div>
-    <button type="button" class="btn btn-success">Enviar</button>
 
   <!--creamos un if para comprobar si se muestran cosas-->
   {#if modalVisible}
@@ -217,8 +214,6 @@
   {#if showModal}
     <ModalParticipantes on:close={handleModalClose} />
   {/if}
-
-  
 </main>
 
 <style>
