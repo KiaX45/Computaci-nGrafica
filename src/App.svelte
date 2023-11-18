@@ -5,6 +5,8 @@
 
   //importamos el modalñ
   import ModalParticipantes from "./components/Forms/ModalParticipantes.svelte";
+  import Modal from "./components/Forms/Modal.svelte";
+  import Modal1 from "./components/Forms/Modal1.svelte";
 
   let fecha = "";
   let hora = "";
@@ -67,11 +69,11 @@
   });
 
   let modalVisible = false;
-
-  const viewModal = () => {
-	modalVisible = true;
-	console.log("Modal abierto");
-  };
+  let showModal = false;
+  function toggleModal() {
+    //showModal = !showModal;
+    modalVisible = true;
+  }
 
   function handleModalClose(event) {
     console.log("Modal cerrado, ¿se guardaron los datos?:", event.detail.saved);
@@ -127,7 +129,7 @@
               <div class="app-participants" style="align-items: center;">
                 <button
                   class="btn btn-outline-success app-button--add-participant"
-                  on:click={viewModal}
+                  on:click={toggleModal}
                 >
                   <span class="app-button__icon">+</span> Adicionar participantes
                 </button>
@@ -175,11 +177,16 @@
       </div>
     </div>
   </div>
-</main>
 
-{#if modalVisible}
-  <ModalParticipantes on:close={handleModalClose} />
-{/if}
+  <!--creamos un if para comprobar si se muestran cosas-->
+  {#if modalVisible}
+	<Modal on:close={handleModalClose} />
+  {/if}
+
+  {#if showModal}
+    <ModalParticipantes on:close={handleModalClose} />
+  {/if}
+</main>
 
 <style>
   /* Prefijo de espacio de nombres 'app-' */

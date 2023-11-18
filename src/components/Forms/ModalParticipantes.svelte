@@ -1,21 +1,19 @@
 <script>
-  import { createEventDispatcher } from 'svelte';
+  import { createEventDispatcher } from "svelte";
 
   const dispatch = createEventDispatcher();
-  let searchTerm = '';
+  let searchTerm = "";
 
   function guardar() {
-    // Lógica de guardado
-    dispatch('close', { saved: true });
+    dispatch("close", { saved: true });
   }
 
   function cancelar() {
-    // Lógica de cancelación
-    dispatch('close', { saved: false });
+    dispatch("close", { saved: false });
   }
 </script>
 
-<div class="modal-overlay" on:click={() => dispatch('close', { saved: false })}>
+<div class="modal-overlay" on:click={() => dispatch("close", { saved: false })}>
   <div class="modal" on:click|stopPropagation>
     <div class="modal-content">
       <div class="modal-header">
@@ -23,7 +21,12 @@
           <option>Seleccione el semestre</option>
           <!-- Opciones de semestre -->
         </select>
-        <input type="search" class="search-input" placeholder="Buscar Participante" bind:value={searchTerm} />
+        <input
+          type="search"
+          class="search-input"
+          placeholder="Buscar Participante"
+          bind:value={searchTerm}
+        />
       </div>
       <div class="modal-body">
         <div class="list-container">
@@ -49,24 +52,44 @@
 
 <style>
   .modal-overlay {
-    /* ... estilos del overlay ... */
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999; /* Alto z-index para asegurarse de que se muestre encima de todo */
   }
+
   .modal {
-    /* ... estilos del modal ... */
-  }
-  .modal-content {
+    display: block;
     background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    width: 800px; /* O el ancho que prefieras */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    position: relative; /* Se añade posición relativa para el z-index del hijo */
+    z-index: 1000; /* Asegurarse de que el modal está encima del overlay */
   }
+
+  .modal-content {
+    padding: 20px;
+    max-width: 800px;
+    min-width: 300px; /* Añadir un ancho mínimo para que sea visible en pantallas pequeñas */
+    max-height: 90vh; /* Ajustar la altura máxima para que no sobrepase la pantalla */
+    overflow-y: auto; /* Agregar scroll si el contenido es muy alto */
+    position: relative; /* Posición relativa para el contenido */
+  }
+
   .modal-header {
     display: flex;
     justify-content: space-between;
     margin-bottom: 20px;
   }
-  .dropdown, .search-input {
+  .dropdown,
+  .search-input {
     padding: 10px;
     margin-right: 10px;
     border: 1px solid #ccc;
@@ -96,7 +119,8 @@
     text-align: right;
     padding-top: 20px;
   }
-  .btn-save, .btn-cancel {
+  .btn-save,
+  .btn-cancel {
     padding: 10px 20px;
     margin-left: 10px;
     border: none;
@@ -104,7 +128,7 @@
     cursor: pointer;
   }
   .btn-save {
-    background-color: #4CAF50; /* Verde */
+    background-color: #4caf50; /* Verde */
     color: white;
   }
   .btn-cancel {
