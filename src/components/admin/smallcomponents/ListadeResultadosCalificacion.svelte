@@ -1,13 +1,15 @@
 <script>
   //importamos el componenete onMount
   import { onMount } from "svelte";
-
+  //importamos el modal para editar datos 
+import ModalEditarResultadoExamen from "../../Forms/ModalEditarResultadoExamen.svelte";
   //Esta es la lista de resultados cuando el usuario ingresa un archivo de excel con las notas de los estudiantes
 
   //creamos una variable que reciba los datos del archivo
   export let json;
   //Creamos una variable que almacene los resultados en individual y otra que almacene todos los resultados
   let resultado = {
+    Id: "",
     Nombre: "",
     Calificación: "",
     Examen: "",
@@ -68,10 +70,52 @@
     });
   }
 
+  //Creamos una variable para mostrar el modal de edición de resultados
+  let modalEditarVisible = false;
   //Creamos una función para editar alguno de los resultados
   const editarResultado = (elecment) =>{
+    resultado = elecment;
+    modalEditarVisible = true;
     console.log(elecment);
   }
+  //Creamos una función que se ejecuta cuando se cierra el modal
+  function handleModalClose(event) {
+  if(event.detail !== null){
+    console.log(event.detail);
+    console.log("Se guardaron los datos");
+    // Actualizamos
+    tablaVisible = false;
+    let updated = false;
+
+    resultados = resultados.map((element) => {
+      if(element.Id === event.detail.Id){
+        updated = true;
+        return {
+          ...element,
+          Nombre: event.detail.Nombre,
+          Calificación: event.detail.Calificación,
+          Examen: event.detail.Examen,
+        };
+      }
+      return element;
+    });
+
+    if (updated) {
+      console.log(resultados);
+    } else {
+      console.log("ID no encontrado en los resultados.");
+    }
+    
+    tablaVisible = true;
+  } else {
+    console.log("No se guardaron los datos");
+  }
+
+  modalEditarVisible = false;
+}
+
+
+  
 </script>
 
 <main>
@@ -87,6 +131,7 @@
           <th>Calificación</th>
           <th>Examen</th>
           <th>Editar</th>
+          <th>Remover</th>
         </tr>
       </thead>
 
@@ -108,9 +153,21 @@
               <button class="btn btn-warning" on:click={editarResultado(element)}>Editar</button>
             </td>
 
+            <td>
+              <button class="btn btn-danger" on:click={editarResultado(element)}>Remover</button>
+            </td>
+
           </tr>
         {/each}
       </tbody>
     </table>
   {/if}
+
+  <!--Creamos el modal para editar los resultados y resivimos los datos que nos envia para mandarlos por parametro-->
+  {#if modalEditarVisible}
+    <ModalEditarResultadoExamen on:close={handleModalClose} formData={resultado}/>
+  {/if}  
+
 </main>
+
+

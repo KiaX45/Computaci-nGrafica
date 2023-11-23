@@ -6,6 +6,8 @@ import * as XLSX from 'xlsx';
 import ListadeResultadosCalificacion from "../smallcomponents/ListadeResultadosCalificacion.svelte";
 
 
+
+
   const handleFileInput = (e) => {
     console.log("Se ha seleccionado un archivo");
     //creamos un objeto para guardar el archivo enviado
@@ -77,6 +79,8 @@ import ListadeResultadosCalificacion from "../smallcomponents/ListadeResultadosC
     <ListadeResultadosCalificacion json={result} />
   {/if}
 </main>
+
+
 
 <style>
 </style>
