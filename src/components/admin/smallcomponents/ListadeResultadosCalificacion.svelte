@@ -55,7 +55,6 @@
       return;
     }
 
-
     resultados = json.map((element) => ({
       Id: element.Id,
       Nombre: element.Nombre,
@@ -131,9 +130,17 @@
 
   //Funciones para remover un resultado
   function removerResultado(event) {
-    console.log(event);
-    resultados = resultados.filter((element) => element.Id !== event.Id);
-    console.log(resultados);
+    var IsConfirm = confirm(
+      "¿Esta seguro?, ¡esta accion no se puede deshacer!",
+    );
+    if (IsConfirm) {
+      resultados = resultados.filter((element) => element.Id !== event.Id);
+      console.log(event);
+      alert("Se ha eliminado el registro");
+      console.log(resultados);
+    } else {
+      alert("Accion cancelada");
+    }
   }
 
   //CReamos una variable para mostrar el modal de añadir resultados
@@ -159,7 +166,7 @@
           existe = true;
         }
       });
-      if(existe){
+      if (existe) {
         alert("El id ya existe");
         return;
       }
@@ -174,14 +181,14 @@
   }
 
   //Función para enviar los datos
-  const EnviarDatos = () =>{
+  const EnviarDatos = () => {
     //comprobamos si hay errores
-    if(erroresTotal>0){
+    if (erroresTotal > 0) {
       alert("Verifique que todas las notas esten en un rango valido");
       return;
     }
     //comprobamos si hay datos
-    if(resultados.length==0){
+    if (resultados.length == 0) {
       alert("No hay datos para enviar");
       return;
     }
@@ -190,14 +197,29 @@
 
     //Despachamos un evento personalizado llamado 'close' para indicarle al componente padre que se enviaron los datos
     dispatch("close", null);
-  }
+  };
 </script>
 
-<main>
-  <h1>Lista de resultados</h1>
+<body>
+  <div class="container text-center">
+    <div class="row">
+      <div class="col">
+        <p>¿Desea agregar mas resultados?</p>
+      </div>
+      <div class="col">
+        <button class="btn btn-success" on:click={añadirResultado}
+          >Añadir</button
+        >
+      </div>
+    </div>
+  </div>
+  <br />
+  <p>El contenido del archivo seleccionado es:</p>
+  <br />
+
   <!--Creamos una tabla para mostrar los resultados-->
   {#if tablaVisible}
-    <table>
+    <table class="table table-striped">
       <!--Creamos el encabesado de la tabla-->
       <thead>
         <tr>
@@ -207,11 +229,6 @@
           <th>Examen</th>
           <th>Editar</th>
           <th>Remover</th>
-          <th
-            ><button class="btn btn-success" on:click={añadirResultado}
-              >Añadir</button
-            ></th
-          >
         </tr>
       </thead>
 
@@ -247,21 +264,22 @@
       </tbody>
     </table>
 
+    <p>EStiamdo usuario tenga en cuenta que si la tabla contiene franjas rojas no se podrán ejecutar cambios</p>
     <!--Creamos un boton para ir al inicio de la página-->
     <button class="btn btn-primary" on:click={scrollToTop}>Ir al inicio</button>
     <button class="btn btn-success" on:click={EnviarDatos}>Enviar</button>
   {/if}
+</body>
 
-  <!--Creamos el modal para editar los resultados y resivimos los datos que nos envia para mandarlos por parametro-->
-  {#if modalEditarVisible}
-    <ModalEditarResultadoExamen
-      on:close={handleModalClose}
-      formData={resultado}
-    />
-  {/if}
+<!--Creamos el modal para editar los resultados y resivimos los datos que nos envia para mandarlos por parametro-->
+{#if modalEditarVisible}
+  <ModalEditarResultadoExamen
+    on:close={handleModalClose}
+    formData={resultado}
+  />
+{/if}
 
-  <!--Creamos el modal para añadir los resultados-->
-  {#if modalAñadirVisible}
-    <ModalAnadirResultado on:close={handleAddModalClose} />
-  {/if}
-</main>
+<!--Creamos el modal para añadir los resultados-->
+{#if modalAñadirVisible}
+  <ModalAnadirResultado on:close={handleAddModalClose} />
+{/if}

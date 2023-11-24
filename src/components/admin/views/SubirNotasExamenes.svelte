@@ -1,13 +1,11 @@
 <script>
-//importamos la librería para leer archivos excel
-import * as XLSX from 'xlsx';
+  //importamos la librería para leer archivos excel
+  import * as XLSX from "xlsx";
 
-//importamos el componente de la lista de resultados
-import ListadeResultadosCalificacion from "../smallcomponents/ListadeResultadosCalificacion.svelte";
-//importamos el modal de añadir resultados
-import ModalAnadirResultado from "../../Forms/ModalAnadirResultado.svelte";
-
-
+  //importamos el componente de la lista de resultados
+  import ListadeResultadosCalificacion from "../smallcomponents/ListadeResultadosCalificacion.svelte";
+  //importamos el modal de añadir resultados
+  import ModalAnadirResultado from "../../Forms/ModalAnadirResultado.svelte";
 
   const handleFileInput = (e) => {
     console.log("Se ha seleccionado un archivo");
@@ -20,7 +18,6 @@ import ModalAnadirResultado from "../../Forms/ModalAnadirResultado.svelte";
       // Mostrar un mensaje de error al usuario
       return;
     }
-
 
     console.log(file.name);
     //validamos que el archivo sea de tipo csv o excel
@@ -39,7 +36,6 @@ import ModalAnadirResultado from "../../Forms/ModalAnadirResultado.svelte";
 
     //llaamamos la función para leer el archivo
     read(file);
-
   };
 
   //Creamos una variable para mostrar el componente de la lista de resultados
@@ -48,93 +44,103 @@ import ModalAnadirResultado from "../../Forms/ModalAnadirResultado.svelte";
   //Creamos una variable para almacenar los datos del archivo
   let result;
 
-    //Función para leer el archivo
-    const read = (file) => {
-      const reader = new FileReader();
-        reader.onload = (e) => {
-            const data = new Uint8Array(e.target.result);
-            const workbook = XLSX.read(data, { type: 'array' });
+  //Función para leer el archivo
+  const read = (file) => {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const data = new Uint8Array(e.target.result);
+      const workbook = XLSX.read(data, { type: "array" });
 
-            // Suponiendo que tu Excel tiene una sola hoja y quieres leerla
-            const firstSheetName = workbook.SheetNames[0];
-            const worksheet = workbook.Sheets[firstSheetName];
+      // Suponiendo que tu Excel tiene una sola hoja y quieres leerla
+      const firstSheetName = workbook.SheetNames[0];
+      const worksheet = workbook.Sheets[firstSheetName];
 
-            // Convierte la hoja en un array de objetos
-            const json = XLSX.utils.sheet_to_json(worksheet);
-            console.log(json); // Resultado final
-            result = json;
-            //mostramos el componente de la lista de resultados
-            listaResultadosVisible = true;
-        };
-        reader.readAsArrayBuffer(file);
+      // Convierte la hoja en un array de objetos
+      const json = XLSX.utils.sheet_to_json(worksheet);
+      console.log(json); // Resultado final
+      result = json;
+      //mostramos el componente de la lista de resultados
+      listaResultadosVisible = true;
     };
+    reader.readAsArrayBuffer(file);
+  };
 
-//Vamos a crear un función para enviar un unico dato al componente lista en caso de que el usuario no haya subido un archivo
-//Para eso vamos a utilizar el modal ya creado para añadir un resultado
+  //Vamos a crear un función para enviar un unico dato al componente lista en caso de que el usuario no haya subido un archivo
+  //Para eso vamos a utilizar el modal ya creado para añadir un resultado
 
-//Creamos una variable para mostrar el modal
-let modalAnadirResultadoVisible = false;
+  //Creamos una variable para mostrar el modal
+  let modalAnadirResultadoVisible = false;
 
-//creamos una función para mostrar el modal
-function mostrarModalAnadirResultado() {
-  modalAnadirResultadoVisible = true;
-}
-
-//creamos una variable para almacenar los datos del archivo
-let resultadoIndividual = null;
-
-//creamos una función para recibir los datos de un modal cerrar el modal y mostrar la tabla de resultados enviando un solo dato
-function handleAddModalClose(event) {
-
-  if (event.detail == null) {
-    console.log("No se ha recibido ningún dato");
-    //cerramos el modal
-    modalAnadirResultadoVisible = false;
-    return;
+  //creamos una función para mostrar el modal
+  function mostrarModalAnadirResultado() {
+    modalAnadirResultadoVisible = true;
   }
 
-  //recibimos los datos del modal
-  resultadoIndividual = event.detail;
-  console.log(result);
+  //creamos una variable para almacenar los datos del archivo
+  let resultadoIndividual = null;
 
-  //cerramos el modal
-  modalAnadirResultadoVisible = false;
+  //creamos una función para recibir los datos de un modal cerrar el modal y mostrar la tabla de resultados enviando un solo dato
+  function handleAddModalClose(event) {
+    if (event.detail == null) {
+      console.log("No se ha recibido ningún dato");
+      //cerramos el modal
+      modalAnadirResultadoVisible = false;
+      return;
+    }
 
-  //mostramos la tabla de resultados
-  listaResultadosVisible = true;
+    //recibimos los datos del modal
+    resultadoIndividual = event.detail;
+    console.log(result);
 
-  //enviamos los datos a la lista de resultados
- 
-}
+    //cerramos el modal
+    modalAnadirResultadoVisible = false;
 
-//CReamos una funció para controlar el evento close de la lista de notas
-const handleListClose = (event) => {
-  console.log("Se ha cerrado la lista de resultados");
-  listaResultadosVisible = false;
-};
+    //mostramos la tabla de resultados
+    listaResultadosVisible = true;
 
+    //enviamos los datos a la lista de resultados
+  }
 
-
+  //CReamos una funció para controlar el evento close de la lista de notas
+  const handleListClose = (event) => {
+    console.log("Se ha cerrado la lista de resultados");
+    listaResultadosVisible = false;
+  };
 </script>
 
 <main>
-  <h1>Suba el archivo de las calificaciones</h1>
-  
-  {#if listaResultadosVisible}
-    <ListadeResultadosCalificacion json={result} result={resultadoIndividual} on:close={handleListClose}/>
-    {:else}
-    <input type="file" name="" id="" on:change={handleFileInput} />
-    <button class="btn btn-success" on:click={mostrarModalAnadirResultado}>Añadir resultados</button>
-  {/if}
+  <div class="card text-center">
+    <h5 class="card-header">Seguimiento de las pruebas</h5>
+    <div class="card-body" style="justify-items: center;">
+      {#if listaResultadosVisible}
+        <ListadeResultadosCalificacion
+          json={result}
+          result={resultadoIndividual}
+          on:close={handleListClose}
+        />
+      {:else}
+      <div class="container text-center">
+        <div class="row">
+          <div class="col">
+            <p>Puede subir su archivo de calificaciones aquí</p>
+            <input type="file" name="" id="" on:change={handleFileInput} />
+          </div>
+          <div class="col">
+            <p>Puede agregar calificaciones desde aquí</p>
+            <button class="btn btn-success" on:click={mostrarModalAnadirResultado}
+              >Añadir resultados</button
+            >
+          </div>
+        </div>
+      </div>
+      {/if}
 
-  {#if modalAnadirResultadoVisible}
-    <ModalAnadirResultado on:close={handleAddModalClose} />
-  {/if}
-
-  
+      {#if modalAnadirResultadoVisible}
+        <ModalAnadirResultado on:close={handleAddModalClose} />
+      {/if}
+    </div>
+  </div>
 </main>
-
-
 
 <style>
 </style>
