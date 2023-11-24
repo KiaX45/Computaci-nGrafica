@@ -14,11 +14,14 @@
     Examen: "",
   };
 
+  
   // Esta función se llama cuando el formulario se envía
   function handleSubmit() {
     console.log("Formulario enviado");
+    alert("Se agregara el registro con el ID ¨" + formData.Id + "¨ el Nombre ¨" + formData.Nombre + "¨ la calificacion ¨" + formData.Calificación
+    + "¨ y la prueba ¨" + formData.Examen);
     //comprobamos si los datos son correctos
-    if(formData.Calificación<0 || formData.Calificación>5 || formData.Id<0){
+    if(formData.Calificación<0 || formData.Calificación>300 || formData.Id<0){
       alert("verifique correctamente los campos");
       return;
     }  
@@ -28,14 +31,18 @@
       // Despachamos un evento personalizado llamado 'close' con los datos del formulario
       dispatch("close", formData);
     }
+    
   }
-
+  
   function handleCancel() {
-    console.log("Formulario cancelado");
-    // Despachamos un evento personalizado llamado 'close' con los datos del formulario
-    dispatch("close", null);
+    if (IsConfirmed != true) {
+      console.log("Formulario cancelado");
+      // Despachamos un evento personalizado llamado 'close' con los datos del formulario
+      dispatch("close", null);
+    }
   }
-
+  
+  
   // Esta función se llama para cerrar el modal sin enviar datos
   function handleClose() {
     console.log("Modal cerrado");
@@ -72,6 +79,7 @@
                   class="form-control"
                   id="nombre"
                   placeholder="ID"
+                  min="0"
                   bind:value={formData.Id}
                 />
               </div>
@@ -92,6 +100,8 @@
                   class="form-control"
                   id="calificacion"
                   placeholder="Calificación"
+                  min="0"
+                  max="300"
                   bind:value={formData.Calificación}
                 />
               </div>
