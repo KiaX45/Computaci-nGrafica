@@ -136,7 +136,7 @@
     if (IsConfirm) {
       resultados = resultados.filter((element) => element.Id !== event.Id);
       console.log(event);
-      alert("Se ha eliminado el registro");
+      alert("Se eliminara el registro");
       console.log(resultados);
     } else {
       alert("Accion cancelada");
@@ -264,7 +264,7 @@
       </tbody>
     </table>
 
-    <p>EStiamdo usuario tenga en cuenta que si la tabla contiene franjas rojas no se podrán ejecutar cambios</p>
+    <p>Estiamdo usuario tenga en cuenta que si la tabla contiene franjas rojas no se podrán ejecutar cambios</p>
     <!--Creamos un boton para ir al inicio de la página-->
     <button class="btn btn-primary" on:click={scrollToTop}>Ir al inicio</button>
     <button class="btn btn-success" on:click={EnviarDatos}>Enviar</button>
