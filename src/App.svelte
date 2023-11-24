@@ -11,23 +11,12 @@ import SubirNotas from "./components/admin/views/SubirNotasExamenes.svelte";
 
 <!--Hacemos el routing dentro de un navegador-->
 <Router>
-
 	<nav class="navbar navbar-expand-lg bg-body-tertiary">
-		<div class="container-fluid">
-			<a class="navbar-brand" href="#">UDENAR</a>
-			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-				<div class="navbar-nav">
-					<!-- svelte-ignore a11y-missing-attribute -->
-					<li><Link to="/planearExamen">Planear Examen</Link> </li>
-					<a class="nav-link" href="">  </a>
-					<li><Link to="/subirNotas">Subir Notas</Link></li>
-				</div>
-			</div>
-		</div>
-	</nav>
+		<ul>
+				<li><Link to="/planearExamen">Planear Examen</Link></li>
+				<li><Link to="/subirNotas">Subir Notas</Link></li>
+		</ul>
+</nav>
 
   <Route path="/planearExamen" component={PlanearExamen} />
   <Route path="/subirNotas" component={SubirNotas} />
