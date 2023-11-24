@@ -27,6 +27,12 @@ import SubirNotas from "./components/admin/views/SubirNotasExamenes.svelte";
 			</div>
 		</div>
 	</nav>
+	<nav>
+		<ul>
+				<li><Link to="/planearExamen">Planear Examen</Link></li>
+				<li><Link to="/subirNotas">Subir Notas</Link></li>
+		</ul>
+</nav>
 
   <Route path="/planearExamen" component={PlanearExamen} />
   <Route path="/subirNotas" component={SubirNotas} />
