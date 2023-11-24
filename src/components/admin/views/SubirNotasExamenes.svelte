@@ -4,7 +4,8 @@ import * as XLSX from 'xlsx';
 
 //importamos el componente de la lista de resultados
 import ListadeResultadosCalificacion from "../smallcomponents/ListadeResultadosCalificacion.svelte";
-
+//importamos el modal de añadir resultados
+import ModalAnadirResultado from "../../Forms/ModalAnadirResultado.svelte";
 
 
 
@@ -68,16 +69,69 @@ import ListadeResultadosCalificacion from "../smallcomponents/ListadeResultadosC
         reader.readAsArrayBuffer(file);
     };
 
+//Vamos a crear un función para enviar un unico dato al componente lista en caso de que el usuario no haya subido un archivo
+//Para eso vamos a utilizar el modal ya creado para añadir un resultado
+
+//Creamos una variable para mostrar el modal
+let modalAnadirResultadoVisible = false;
+
+//creamos una función para mostrar el modal
+function mostrarModalAnadirResultado() {
+  modalAnadirResultadoVisible = true;
+}
+
+//creamos una variable para almacenar los datos del archivo
+let resultadoIndividual = null;
+
+//creamos una función para recibir los datos de un modal cerrar el modal y mostrar la tabla de resultados enviando un solo dato
+function handleAddModalClose(event) {
+
+  if (event.detail == null) {
+    console.log("No se ha recibido ningún dato");
+    //cerramos el modal
+    modalAnadirResultadoVisible = false;
+    return;
+  }
+
+  //recibimos los datos del modal
+  resultadoIndividual = event.detail;
+  console.log(result);
+
+  //cerramos el modal
+  modalAnadirResultadoVisible = false;
+
+  //mostramos la tabla de resultados
+  listaResultadosVisible = true;
+
+  //enviamos los datos a la lista de resultados
+ 
+}
+
+//CReamos una funció para controlar el evento close de la lista de notas
+const handleListClose = (event) => {
+  console.log("Se ha cerrado la lista de resultados");
+  listaResultadosVisible = false;
+};
+
+
 
 </script>
 
 <main>
   <h1>Suba el archivo de las calificaciones</h1>
-  <input type="file" name="" id="" on:change={handleFileInput} />
-
+  
   {#if listaResultadosVisible}
-    <ListadeResultadosCalificacion json={result} />
+    <ListadeResultadosCalificacion json={result} result={resultadoIndividual} on:close={handleListClose}/>
+    {:else}
+    <input type="file" name="" id="" on:change={handleFileInput} />
+    <button class="btn btn-success" on:click={mostrarModalAnadirResultado}>Añadir resultados</button>
   {/if}
+
+  {#if modalAnadirResultadoVisible}
+    <ModalAnadirResultado on:close={handleAddModalClose} />
+  {/if}
+
+  
 </main>
 
 
