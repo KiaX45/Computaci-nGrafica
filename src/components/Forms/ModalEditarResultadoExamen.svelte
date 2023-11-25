@@ -7,16 +7,56 @@
   
   // Este es el estado local del formulario, que recogerá los valores de los inputs
 
-  export let formData = {
+   export let formData = {
     Id: "",
     Nombre: "",
     Calificación: 0.0,
     Examen: "",
+    CE: 0,
+    RC: 0,
+    LC: 0,
+    CC: 0,
+    I: 0,
   };
+
 
   // Esta función se llama cuando el formulario se envía
   function handleSubmit() {
     console.log("Formulario enviado");
+    //Comprobamos que los datos sean correctos
+    //primero que todos los datos se llenaron correctamente
+    if (
+      formData.Nombre == "" ||
+      formData.Examen == "" ||
+      formData.Calificación == 0
+    ) {
+      alert("Por favor llene todos los datos");
+      return;
+    }
+
+    //comprobamos que la calificación este en el rango correcto
+    if (formData.Calificación < 0 || formData.Calificación > 300) {
+      alert("La calificación debe estar entre 0 y 300");
+      return;
+    }
+
+    //comprobamos que las competencias esten en el rango correcto en un rango de 0 a 300
+    if (
+      formData.CE < 0 ||
+      formData.CE > 300 ||
+      formData.RC < 0 ||
+      formData.RC > 300 ||
+      formData.LC < 0 ||
+      formData.LC > 300 ||
+      formData.CC < 0 ||
+      formData.CC > 300 ||
+      formData.I < 0 ||
+      formData.I > 300
+    ) {
+      alert("Las competencias deben estar entre 0 y 300");
+      return;
+    }
+
     // Despachamos un evento personalizado llamado 'close' con los datos del formulario
     dispatch("close", formData);
   }
@@ -38,7 +78,7 @@
 <!-- Estructura del modal -->
 <div class="modal show" tabindex="-1" style="display: block;">
   <div class="modal-dialog">
-    <div class="modal-content">
+    <div class="modal-content" style="width: 600px;">
       <div class="modal-header">
         <h5 class="modal-title">Ingrese los nuevos datos</h5>
         <!-- Botón para cerrar el modal -->
@@ -54,9 +94,9 @@
         <form>
           <!-- Campos visuales -->
           <div class="container text-center">
-           <!--Creamos un formulario para los nuevos resultasdos-->
+            <!--Creamos un formulario para los nuevos resultasdos-->
             <div class="row">
-              <div class="col">
+              <div class="col-md-6 mx-2">
                 <label for="nombre">Nombre</label>
                 <input
                   type="text"
@@ -66,17 +106,7 @@
                   bind:value={formData.Nombre}
                 />
               </div>
-              <div class="col">
-                <label for="calificacion">Calificación</label>
-                <input
-                  type="number"
-                  class="form-control"
-                  id="calificacion"
-                  placeholder="Calificación"
-                  bind:value={formData.Calificación}
-                />
-              </div>
-              <div class="col">
+              <div class="col-md-3 mx-2">
                 <label for="examen">Examen</label>
                 <input
                   type="text"
@@ -87,12 +117,99 @@
                 />
               </div>
             </div>
-           
+            <div style="height: 20px;"></div>
+            <!--Creamos otra fila para poner las competencias de las calificaciones-->
+            <div class="row" >
+              <div class="col">
+                <label for="nombre">CE</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="nombre"
+                  placeholder="CE"
+                  min="0"
+                  max="100"
+                  bind:value={formData.CE}
+                />
+              </div>
+              <div class="col">
+                <label for="nombre">RC</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="nombre"
+                  placeholder="RC"
+                  min="0"
+                  max="100"
+                  bind:value={formData.RC}
+                />
+              </div>
+              <div class="col">
+                <label for="calificacion">LC</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="calificacion"
+                  placeholder="LC"
+                  min="0"
+                  max="100"
+                  bind:value={formData.LC}
+                />
+              </div>
+              <div class="col">
+                <label for="examen">CC</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="examen"
+                  placeholder="CC"
+                  min="0"
+                  max="100"
+                  bind:value={formData.CC}
+                />
+              </div>
+              <div class="col">
+                <label for="examen">I</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="examen"
+                  placeholder="I"
+                  min="0"
+                  max="100"
+                  bind:value={formData.I}
+                />
+              </div>
+            </div>
+             <div style="height: 20px;"></div>
+
+            <div class="row">
+              <div class="col-md-4 mx-auto">
+                <label for="calificacion">Calificación</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="calificacion"
+                  placeholder="Calificación"
+                  min="0"
+                  max="300"
+                  bind:value={formData.Calificación}
+                />
+              </div>
+
+            </div>
+
+            <div style="height: 20px;"></div>
+            <!-- Botón para enviar el formulario -->
+            <button
+              type="submit"
+              class="btn btn-success"
+              on:click|preventDefault={handleSubmit}>Guardar</button
+            >
+            <button type="submit" class="btn btn-danger" on:click|preventDefault={handleCancel}
+              >Cancelar</button
+            >
           </div>
-          <div style="height: 20px;"></div>
-          <!-- Botón para enviar el formulario -->
-          <button type="submit" class="btn btn-success" on:click={handleSubmit}>Guardar</button>
-          <button type="submit" class="btn btn-danger" on:click={handleCancel}>Cancelar</button>
         </form>
       </div>
     </div>

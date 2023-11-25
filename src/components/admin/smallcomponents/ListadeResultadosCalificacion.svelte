@@ -58,6 +58,11 @@
     resultados = json.map((element) => ({
       Id: element.Id,
       Nombre: element.Nombre,
+      CE: element.CE,
+      RC: element.RC,
+      LC: element.LC,
+      CC: element.CC,
+      I: element.I,
       Calificación: element.Calificación,
       Examen: element.Examen,
       Error: false,
@@ -225,6 +230,12 @@
         <tr>
           <th>Id</th>
           <th>Nombre</th>
+          <!--Ponemos las nuevas conpetencias-->
+          <th>CE</th>
+          <th>RC</th>
+          <th>LC</th>
+          <th>CC</th>
+          <th>I</th>
           <th>Calificación</th>
           <th>Examen</th>
           <th>Editar</th>
@@ -238,6 +249,12 @@
           <tr>
             <td>{element.Id}</td>
             <td>{element.Nombre}</td>
+            <!--Ponemos las nuevas conpetencias-->
+            <td>{element.CE}</td>
+            <td>{element.RC}</td>
+            <td>{element.LC}</td>
+            <td>{element.CC}</td>
+            <td>{element.I}</td>
             <!--Cambiamos el color del fondo si la nota esta en un rango no valido-->
             {#if element.Error}
               <td style="background-color: red;">{element.Calificación}</td>
