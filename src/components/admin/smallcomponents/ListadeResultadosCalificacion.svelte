@@ -75,7 +75,7 @@
     //Recorremos el arreglo de resultados
     resultados.forEach((element) => {
       //Verificamos que la nota este en el rango de 0 a 5
-      if (element.Calificación < 0 || element.Calificación > 300) {
+      if (element.Calificación < 0 || element.Calificación > 5) {
         //Si la nota no esta en el rango valido, entonces marcamos el error
         element.Error = true;
         //Aumentamos el contador de errores
