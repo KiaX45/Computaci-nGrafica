@@ -141,9 +141,9 @@
 {:else if error}
   <div class="alert alert-danger">{error}</div>
 {:else if resultadoIcfes}
-  <div class="alert alert-success">
-    <pre>{JSON.stringify(resultadoIcfes, null, 2)}</pre>
-  </div>
+  <div class="Información">
+      <h1 class="titulo-con-fondo">Prueba Saber 11</h1>
+    </div>
   <div class="chart-container">
     <canvas bind:this={canvasElement}></canvas>
   </div>
@@ -160,5 +160,23 @@
   canvas {
     width: 100% !important; /* Importante para asegurar que ocupa el tamaño del contenedor */
     height: 100% !important; /* Importante para asegurar que ocupa el tamaño del contenedor */
+  }
+
+  .titulo-con-fondo {
+    background-color: #17a2b8; /* Usa un color vivo de tu elección */
+    color: white; /* Color del texto */
+    padding: 10px 20px; /* Ajusta el relleno a tu gusto */
+    border-radius: 50px; /* Esto crea bordes redondeados. Ajusta para cambiar la forma */
+    display: inline-block; /* Esto permite que el fondo se ajuste al texto */
+    font-size: 1.5em; /* Ajusta el tamaño del texto según sea necesario */
+    font-family: Arial, sans-serif; /* Elige una tipografía apropiada */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Opcional: Añade una sombra para resaltar el título */
+  }
+
+  /*clase de div centrado*/
+  .Información {
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
   }
 </style>

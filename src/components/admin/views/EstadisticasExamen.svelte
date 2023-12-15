@@ -50,6 +50,9 @@
   </div>
 </div>
 
+<div style="height: 40px;">
+
+</div>
 <!--SI el imput es correcto creamos el componente-->
 {#if consultarResultados}
   <Resultados codigo={codigoCorrecto} />
