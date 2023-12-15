@@ -136,7 +136,7 @@
   //Funciones para remover un resultado
   function removerResultado(event) {
     var IsConfirm = confirm(
-      "¿Esta seguro?, ¡esta accion no se puede deshacer!",
+      "¿Esta seguro?, ¡esta accion no se puede deshacer!"
     );
     if (IsConfirm) {
       resultados = resultados.filter((element) => element.Id !== event.Id);
@@ -257,10 +257,16 @@
             <td>{element.I}</td>
             <!--Cambiamos el color del fondo si la nota esta en un rango no valido-->
             {#if element.Error}
-              <td style="background-color: red;">{element.Calificación}</td>
+              <td
+                style="background-color: red; padding: 0; margin: 0; border: none;"
+                >{element.Calificación}</td
+              >
             {:else}
-              <td>{element.Calificación}</td>
+              <td style="padding: 0; margin: 0; border: none;"
+                >{element.Calificación}</td
+              >
             {/if}
+
             <td>{element.Examen}</td>
             <!--Creamos un boton editar con bootstrap para que cuando se le de click edite el elemento-->
             <td>
@@ -281,7 +287,10 @@
       </tbody>
     </table>
 
-    <p>Estiamdo usuario tenga en cuenta que si la tabla contiene franjas rojas no se podrán ejecutar cambios</p>
+    <p>
+      Estiamdo usuario tenga en cuenta que si la tabla contiene franjas rojas no
+      se podrán ejecutar cambios
+    </p>
     <!--Creamos un boton para ir al inicio de la página-->
     <button class="btn btn-primary" on:click={scrollToTop}>Ir al inicio</button>
     <button class="btn btn-success" on:click={EnviarDatos}>Enviar</button>
