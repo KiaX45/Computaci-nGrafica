@@ -90,7 +90,7 @@
 
                 <div class="tipo-actividad">
                   <select class="form-select" aria-label="Default select example">
-                  <option value="" selected hidden>Bloque Uno</option>
+                  <option value="" selected hidden>Tipo Actividad</option>
                   <option value="1">Parcial</option>
                   <option value="2">Taller</option>
                   <option value="3">Laboratorio</option>
