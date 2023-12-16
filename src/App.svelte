@@ -45,13 +45,31 @@
 
 <style>
 	body {
-		/* Cambia la URL a la ruta correcta de tu imagen */
-		background-image: url("https://situr.narino.gov.co/storage/Clientes/situr_narino/principal/imagenes/contenidos/7957-22_Universidad_de_Nari%C3%B1o_Academia_de_Historia.jpg");
-		background-size: cover; /* Ajusta el tamaño de la imagen al contenedor */
-		background-repeat: no-repeat; /* Evita la repetición de la imagen de fondo */
-		background-position: center center; /* Centra la imagen en el fondo */
-	}
-	.navbar {
-		background-color: rgba(255, 255, 255, 0.6);
-	}
+    margin: 0;
+    padding: 0;
+  }
+
+  .navbar {
+    background-color: rgba(255, 255, 255, 0.6); /* Fondo del navbar con opacidad */
+    /* Puedes ajustar otros estilos del navbar aquí */
+  }
+
+  .navbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .navbar ul li {
+    display: inline;
+    margin-right: 10px; /* Espaciado entre elementos del navbar */
+  }
+
+  /* Añadir el fondo solo al navbar */
+  .navbar {
+    background-image: url("https://situr.narino.gov.co/storage/Clientes/situr_narino/principal/imagenes/contenidos/7957-22_Universidad_de_Nari%C3%B1o_Academia_de_Historia.jpg");
+    background-size: cover; /* Ajusta el tamaño de la imagen al contenedor */
+    background-repeat: no-repeat; /* Evita la repetición de la imagen de fondo */
+    background-position: center center; /* Centra la imagen en el fondo */
+  }
 </style>

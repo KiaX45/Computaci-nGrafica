@@ -68,14 +68,6 @@
     padding-top: 50px;
   }
 
-  body {
-    /* Cambia la URL a la ruta correcta de tu imagen */
-    background-image: url("https://situr.narino.gov.co/storage/Clientes/situr_narino/principal/imagenes/contenidos/7957-22_Universidad_de_Nari%C3%B1o_Academia_de_Historia.jpg");
-    background-size: cover; /* Ajusta el tamaño de la imagen al contenedor */
-    background-repeat: no-repeat; /* Evita la repetición de la imagen de fondo */
-    background-position: center center; /* Centra la imagen en el fondo */
-  }
-
   .card {
     background-color: rgba(255, 255, 255, 0.6);
   }

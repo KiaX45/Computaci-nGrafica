@@ -13,7 +13,6 @@
 
   let mostrarTextArea = false;
 
-
   let modalVisible = false;
   let showModal = false;
   function toggleModal() {
@@ -34,6 +33,51 @@
       <div class="card card-body" style="align-items: center;">
         <div class="container text-center">
           <div class="row">
+            <div class="col">
+              <div class="card-header">Detalles de la Actividad</div>
+              <br />
+              <p>Ingrese el nombre de la actividad</p>
+              <div class="input-group mb-3">
+                <span class="input-group-text">
+                  <div class="app-upload__icon">ℹ️</div>
+                </span>
+                <div class="form-floating">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="floatingInputGroup1"
+                    placeholder="Username"
+                  />
+                  <label for="floatingInputGroup1"
+                    >Nombre de la actividad
+                  </label>
+                </div>
+              </div>
+              <br />
+              <div class="info-panel">
+                <p>Seleccione la materia que será evaludada</p>
+                <select class="form-select" aria-label="Default select example">
+                  <option value="" selected hidden
+                    >Ingeniería de Software I</option
+                  >
+                  <option value="1">Ingeniería de Software I</option>
+                  <option value="2">Computación gráfica</option>
+                </select>
+                <br />
+              </div>
+              <div class="info-panel">
+                <p>Seleccione la competencia a evaluar</p>
+                <select class="form-select" aria-label="Default select example">
+                  <option value="" selected hidden>Comunicación escrita</option>
+                  <option value="1">Comunicación escrita</option>
+                  <option value="2">Razamiento cuantitativo</option>
+                  <option value="3">Lectura critica</option>
+                  <option value="4">Competencias ciudadanas</option>
+                  <option value="5">Inglés</option>
+                </select>
+                <br />
+              </div>
+            </div>
             <div class="col" style="align-items: center;">
               <div class="card-header">Ajustar Fecha y Hora</div>
               <br />
@@ -89,39 +133,43 @@
                 </div>
 
                 <div class="tipo-actividad">
-                  <select class="form-select" aria-label="Default select example">
-                  <option value="" selected hidden>Tipo Actividad</option>
-                  <option value="1">Parcial</option>
-                  <option value="2">Taller</option>
-                  <option value="3">Laboratorio</option>
-                </select>
+                  <select
+                    class="form-select"
+                    aria-label="Default select example"
+                  >
+                    <option value="" selected hidden>Tipo Actividad</option>
+                    <option value="1">Parcial</option>
+                    <option value="2">Taller</option>
+                    <option value="3">Laboratorio</option>
+                  </select>
 
-                <button class="btn btn-warning" on:click={() =>{
-                  mostrarTextArea = true;
-                }}>Otro</button>
+                  <button
+                    class="btn btn-warning"
+                    on:click={() => {
+                      mostrarTextArea = true;
+                    }}>Otro</button
+                  >
                 </div>
 
                 {#if mostrarTextArea}
-
-                <div class="input-group mb-3">
-                  <span class="input-group-text">
-                    <div class="app-upload__icon">ℹ️</div>
-                  </span>
-                  <div class="form-floating">
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="floatingInputGroup1"
-                      placeholder="Username"
-                    />
-                    <label for="floatingInputGroup1"
-                      >Tipo de activididad
-                    </label>
+                  <div class="input-group mb-3">
+                    <span class="input-group-text">
+                      <div class="app-upload__icon">ℹ️</div>
+                    </span>
+                    <div class="form-floating">
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="floatingInputGroup1"
+                        placeholder="Username"
+                      />
+                      <label for="floatingInputGroup1"
+                        >Tipo de activididad
+                      </label>
+                    </div>
                   </div>
-                </div>
-
                 {/if}
-                
+
                 <div>
                   <button
                     class="btn btn-outline-success app-button--add-participant"
@@ -130,8 +178,6 @@
                     <span class="app-button__icon">+</span> Adicionar participantes
                   </button>
                 </div>
-                
-                
               </div>
               <br />
             </div>
@@ -168,7 +214,6 @@
                 alt="img-pdf-file"
               />
             </div>
-
             <div class="col">
               <div class="card-header">Ubicación de la prueba</div>
               <br />
@@ -213,30 +258,29 @@
 </body>
 
 {#if modalVisible}
-      <Modal on:close={handleModalClose} />
-    {/if}
+  <Modal on:close={handleModalClose} />
+{/if}
 
 <style>
-body {
-  /* Cambia la URL a la ruta correcta de tu imagen */
-  background-image: url('https://situr.narino.gov.co/storage/Clientes/situr_narino/principal/imagenes/contenidos/7957-22_Universidad_de_Nari%C3%B1o_Academia_de_Historia.jpg');
-  background-size: cover; /* Ajusta el tamaño de la imagen al contenedor */
-  background-repeat: no-repeat; /* Evita la repetición de la imagen de fondo */
-  background-position: center center; /* Centra la imagen en el fondo */
-}
+  body {
+    /* Cambia la URL a la ruta correcta de tu imagen */
+    background-image: url("https://situr.narino.gov.co/storage/Clientes/situr_narino/principal/imagenes/contenidos/7957-22_Universidad_de_Nari%C3%B1o_Academia_de_Historia.jpg");
+    background-size: cover; /* Ajusta el tamaño de la imagen al contenedor */
+    background-repeat: no-repeat; /* Evita la repetición de la imagen de fondo */
+    background-position: center center; /* Centra la imagen en el fondo */
+  }
 
-.card {
-  background-color: rgba(255, 255, 255, 0.6);
-}
+  .card {
+    background-color: rgba(255, 255, 255, 0.6);
+  }
 
-.tipo-actividad{
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  gap: 20px;
-  margin-bottom: 20px;
-  margin-top: 20px;
-}
-
+  .tipo-actividad {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+  }
 </style>
