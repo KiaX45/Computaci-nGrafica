@@ -1,4 +1,6 @@
 <script>
+  import Modal from "../../Forms/Modal.svelte";
+
   let fecha = "";
   let hora = "";
 
@@ -7,6 +9,21 @@
     // Aquí podrías agregar la lógica para procesar la fecha y hora seleccionadas
     console.log(`Fecha seleccionada: ${fecha}`);
     console.log(`Hora seleccionada: ${hora}`);
+  }
+
+  let mostrarTextArea = false;
+
+
+  let modalVisible = false;
+  let showModal = false;
+  function toggleModal() {
+    //showModal = !showModal;
+    modalVisible = true;
+  }
+
+  function handleModalClose(event) {
+    console.log("Modal cerrado, ¿se guardaron los datos?:", event.detail.saved);
+    modalVisible = false;
   }
 </script>
 
@@ -70,6 +87,51 @@
                     ¿Permitir a los estudiantes subir archivos?
                   </label>
                 </div>
+
+                <div class="tipo-actividad">
+                  <select class="form-select" aria-label="Default select example">
+                  <option value="" selected hidden>Bloque Uno</option>
+                  <option value="1">Parcial</option>
+                  <option value="2">Taller</option>
+                  <option value="3">Laboratorio</option>
+                </select>
+
+                <button class="btn btn-warning" on:click={() =>{
+                  mostrarTextArea = true;
+                }}>Otro</button>
+                </div>
+
+                {#if mostrarTextArea}
+
+                <div class="input-group mb-3">
+                  <span class="input-group-text">
+                    <div class="app-upload__icon">ℹ️</div>
+                  </span>
+                  <div class="form-floating">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="floatingInputGroup1"
+                      placeholder="Username"
+                    />
+                    <label for="floatingInputGroup1"
+                      >Tipo de activididad
+                    </label>
+                  </div>
+                </div>
+
+                {/if}
+                
+                <div>
+                  <button
+                    class="btn btn-outline-success app-button--add-participant"
+                    on:click={toggleModal}
+                  >
+                    <span class="app-button__icon">+</span> Adicionar participantes
+                  </button>
+                </div>
+                
+                
               </div>
               <br />
             </div>
@@ -150,6 +212,10 @@
   </main>
 </body>
 
+{#if modalVisible}
+      <Modal on:close={handleModalClose} />
+    {/if}
+
 <style>
 body {
   /* Cambia la URL a la ruta correcta de tu imagen */
@@ -161,6 +227,16 @@ body {
 
 .card {
   background-color: rgba(255, 255, 255, 0.6);
+}
+
+.tipo-actividad{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 20px;
+  margin-top: 20px;
 }
 
 </style>
