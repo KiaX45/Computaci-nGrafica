@@ -13,6 +13,7 @@
   }
 </script>
 
+<!-- svelte-ignore a11y-click-events-have-key-events -->
 <div class="modal-overlay" on:click={() => dispatch("close", { saved: false })}>
   <div class="modal" on:click|stopPropagation>
     <div class="modal-content">

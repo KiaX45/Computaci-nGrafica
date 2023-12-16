@@ -3,7 +3,6 @@
   import "leaflet/dist/leaflet.css";
   import { onMount } from "svelte";
 
-
   //importamos el modalñ
   import ModalParticipantes from "../../Forms/ModalParticipantes.svelte";
   import Modal from "../../Forms/Modal.svelte";
@@ -82,140 +81,148 @@
   }
 </script>
 
-<main>
-  <h5 class="card-title">Planeación Simulcaro Prueba Saber Pro</h5>
-  <div class="card bg-light">
-    <div class="card-body">
-      <div class="container text-center">
-        <div class="row">
-          <div class="col" style="align-items: center;">
-            <div class="card-header">Ajustar Fecha y Hora</div>
-            <br />
-            <div class="form-check form-switch">
-              <div class="container">
-                <div class="row">
-                  <div class="col">
+<body>
+  <main>
+    <h5 class="card-title card text-center">
+      Planeación Simulcaro Prueba Saber Pro
+    </h5>
+    <div class="card">
+      <div class="card-body">
+        <div class="container text-center">
+          <div class="row">
+            <div class="col" style="align-items: center;">
+              <div class="card-header">Ajustar Fecha y Hora</div>
+              <br />
+              <div class="form-check form-switch">
+                <div class="container">
+                  <div class="row">
+                    <div class="col">
+                      <input
+                        type="date"
+                        bind:value={fecha}
+                        class="form-control"
+                      />
+                    </div>
+                    <div class="col">
+                      <input
+                        type="time"
+                        bind:value={hora}
+                        class="form-control"
+                      />
+                    </div>
+                    <div class="col">
+                      <br />
+                      <button
+                        class="btn btn-success"
+                        on:click={confirmarFechaHora}>Confirmar</button
+                      >
+                      <br />
+                    </div>
+                  </div>
+                </div>
+                <br />
+                <div class="app-checkbox">
+                  <label class="app-checkbox__label">
                     <input
-                      type="date"
-                      bind:value={fecha}
-                      class="form-control"
+                      type="checkbox"
+                      class="app-checkbox__input"
+                      bind:checked={enviarNotificacion}
                     />
-                  </div>
-                  <div class="col">
-                    <input type="time" bind:value={hora} class="form-control" />
-                  </div>
-                  <div class="col">
-                    <br />
-                    <button
-                      class="btn btn-success"
-                      on:click={confirmarFechaHora}>Confirmar</button
-                    >
-                    <br />
-                  </div>
-                </div>
-              </div>
-              <br />
-              <div class="app-checkbox">
-                <label class="app-checkbox__label">
-                  <input
-                    type="checkbox"
-                    class="app-checkbox__input"
-                    bind:checked={enviarNotificacion}
-                  />
-                  ¿Enviar correo de notificación a los interesados?
-                </label>
-              </div>
-              <br />
-              <div class="app-participants" style="align-items: center;">
-                <button
-                  class="btn btn-outline-success app-button--add-participant"
-                  on:click={toggleModal}
-                >
-                  <span class="app-button__icon">+</span> Adicionar participantes
-                </button>
-              </div>
-            </div>
-            <br />
-          </div>
-
-          <div class="col">
-            <div class="card-header">Subir archivo</div>
-            <br />
-            <div class="mb-3">
-              <label for="formFile" class="form-label"
-                >Por favor suba el archivo de la prueba</label
-              >
-              <div
-                class="app-upload__container"
-                on:drop={handleDrop}
-                on:dragover={preventDefault}
-                on:dragenter={preventDefault}
-              >
-                <input
-                  type="file"
-                  id="fileInput"
-                  multiple
-                  on:change={handleFiles}
-                  class="app-upload__input"
-                />
-                <label for="fileInput" class="app-upload__label">
-                  <div class="app-upload__icon">🌥️</div>
-                  Choose files to Upload
-                </label>
-                <div class="app-upload__drag-text">
-                  or drag and drop them here
-                </div>
-              </div>
-            </div>
-            <br />
-            <p>Su archivo es</p>
-            <img
-              src="https://cdn-icons-png.flaticon.com/512/80/80942.png"
-              style="height: 150px;"
-              class="img-fluid"
-              alt="img-pdf-file"
-            />
-          </div>
-
-          <div class="col">
-            <div class="card-header">Ubicación de la prueba</div>
-            <br />
-            <div id="map" style="height: 350px;" />
-            <div class="info-panel">
-              <p>
-                Preview de la locación señalada disponible para ser cambiada
-              </p>
-              <div class="input-group mb-3">
-                <span class="input-group-text">
-                  <div class="app-upload__icon">ℹ️</div>
-                </span>
-                <div class="form-floating">
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="floatingInputGroup1"
-                    placeholder="Username"
-                  />
-                  <label for="floatingInputGroup1"
-                    >Detalles de la ubicación
+                    ¿Enviar correo de notificación a los interesados?
                   </label>
                 </div>
+                <br />
+                <div class="app-participants" style="align-items: center;">
+                  <button
+                    class="btn btn-outline-success app-button--add-participant"
+                    on:click={toggleModal}
+                  >
+                    <span class="app-button__icon">+</span> Adicionar participantes
+                  </button>
+                </div>
+              </div>
+              <br />
+            </div>
+
+            <div class="col">
+              <div class="card-header">Subir archivo</div>
+              <br />
+              <div class="mb-3">
+                <label for="formFile" class="form-label"
+                  >Por favor suba el archivo de la prueba</label
+                >
+                <div
+                  class="app-upload__container"
+                  on:drop={handleDrop}
+                  on:dragover={preventDefault}
+                  on:dragenter={preventDefault}
+                >
+                  <input
+                    type="file"
+                    id="fileInput"
+                    multiple
+                    on:change={handleFiles}
+                    class="app-upload__input"
+                  />
+                  <label for="fileInput" class="app-upload__label">
+                    <div class="app-upload__icon">🌥️</div>
+                    Choose files to Upload
+                  </label>
+                  <div class="app-upload__drag-text">
+                    or drag and drop them here
+                  </div>
+                </div>
+              </div>
+              <br />
+              <p>Su archivo es</p>
+              <img
+                src="https://cdn-icons-png.flaticon.com/512/80/80942.png"
+                style="height: 150px;"
+                class="img-fluid"
+                alt="img-pdf-file"
+              />
+            </div>
+
+            <div class="col">
+              <div class="card-header">Ubicación de la prueba</div>
+              <br />
+              <div id="map" style="height: 350px;" />
+              <div class="info-panel">
+                <p>
+                  Preview de la locación señalada disponible para ser cambiada
+                </p>
+                <div class="input-group mb-3">
+                  <span class="input-group-text">
+                    <div class="app-upload__icon">ℹ️</div>
+                  </span>
+                  <div class="form-floating">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="floatingInputGroup1"
+                      placeholder="Username"
+                    />
+                    <label for="floatingInputGroup1"
+                      >Detalles de la ubicación
+                    </label>
+                  </div>
+                </div>
               </div>
             </div>
+            <button class="btn btn-success" on:click={onMount}>
+              Guardar Cambios
+            </button>
           </div>
-          <button class="btn btn-success" on:click={onMount}>
-            Guardar Cambios
-          </button>
         </div>
       </div>
     </div>
-  </div>
 
-  <!--creamos un if para comprobar si se muestran cosas-->
-  {#if modalVisible}
-    <Modal on:close={handleModalClose} />
-  {/if}
-</main>
+    <!--creamos un if para comprobar si se muestran cosas-->
+    {#if modalVisible}
+      <Modal on:close={handleModalClose} />
+    {/if}
+  </main>
+</body>
 
 <style>
   /* Prefijo de espacio de nombres 'app-' */
@@ -293,4 +300,15 @@
   .info-panel {
     margin-top: 10px;
   }
+  body {
+  /* Cambia la URL a la ruta correcta de tu imagen */
+  background-image: url('https://situr.narino.gov.co/storage/Clientes/situr_narino/principal/imagenes/contenidos/7957-22_Universidad_de_Nari%C3%B1o_Academia_de_Historia.jpg');
+  background-size: cover; /* Ajusta el tamaño de la imagen al contenedor */
+  background-repeat: no-repeat; /* Evita la repetición de la imagen de fondo */
+  background-position: center center; /* Centra la imagen en el fondo */
+}
+
+.card {
+  background-color: rgba(255, 255, 255, 0.7);
+}
 </style>
