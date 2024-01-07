@@ -1,62 +1,19 @@
 <script>
-  import { onMount, onDestroy } from "svelte";
+  import { onDestroy } from "svelte";
   import Chart from "chart.js/auto";
-  import { createEventDispatcher } from 'svelte';
 
-
-
-
-  export let codigo = "";
-  let resultadoIcfes = null;
-  let isLoading = false;
+  export let resultadosFinales = null;
   let error = "";
   let myChart;
-  const dispatch = createEventDispatcher();
 
   //Metodo para cargar los resultados del estudiante
-  const cargarResultados = async () => {
-    try {
-      isLoading = true;
-      const response = await fetch(
-        `http://localhost:8080/api/estudiantes/${codigo}/simulacros`
-      );
-      if (!response.ok) {
-        throw new Error("Error en la respuesta de la API");
-      }
-      resultadoIcfes = await response.json();
-      dispatch('enviarDatos', resultadoIcfes);
-    } catch (e) {
-      
-      //error =  "No se encontraron resultados con el código del estudiante proporcionado";
-        // "No se encontraron resultados con el código del estudiante proporcionado";
-        //ponemos resultados por defecto para testear
-        resultadoIcfes = [
-          {
-            codigoEstudiante: "2018100001",
-            nombreEstudiante: "Juan",
-            apellidoEstudiante: "Perez",
-            lectura: 40,
-            matematicas: 100,
-            sociales: 70,
-            naturales: 82,
-            ingles: 90,
-          }
-        ];
-        dispatch('enviarDatos', resultadoIcfes);
-        console.log(resultadoIcfes);
-    } finally {
-      isLoading = false;
-    }
-  };
-
-  //Reactividad del componente para que se ejecute cada vez que cambie el codigo
-  $: cargarResultados(), codigo;
+  const cargarResultados = async () => {};
 
   let canvasElement;
 
   // Reactiva: inicializa el gráfico una vez que los datos y el canvas están disponibles
   $: {
-    if (resultadoIcfes && canvasElement) {
+    if (resultadosFinales && canvasElement) {
       inicializarGrafico();
     }
   }
@@ -67,24 +24,21 @@
     }
 
     const ctx = canvasElement.getContext("2d");
-    // Aquí procesarías 'resultadosEstudiante' para obtener los datos del gráfico
-    const datosGrafico = procesarDatos(resultadoIcfes);
 
     myChart = new Chart(ctx, {
       type: "bar",
       data: {
         labels: [
-          "Lectura",
-          "Matematicas",
-          "Sociales",
-          "Naturales",
-          "Inglés",
-          "Resultado",
+          "PromedioLectura",
+          "PromedioMatematicas",
+          "PromedioSociales",
+          "PromedioNaturales",
+          "PromedioIngles",
         ],
         datasets: [
           {
             label: "Calificación Promedio por Sección",
-            data: datosGrafico,
+            data: resultadosFinales,
             backgroundColor: [
               "rgb(255, 99, 132)", // Rojo
               "rgb(54, 162, 235)", // Azul
@@ -137,20 +91,6 @@
     });
   }
 
-  const procesarDatos = (resultadosEstudiante) => {
-    const datosGrafico = [];
-    resultadosEstudiante.forEach((resultado) => {
-      datosGrafico.push(resultado.lectura);
-      datosGrafico.push(resultado.matematicas);
-      datosGrafico.push(resultado.sociales);
-      datosGrafico.push(resultado.naturales);
-      datosGrafico.push(resultado.ingles);
-      let resultadoFinal = (resultado.lectura + resultado.matematicas + resultado.sociales + resultado.naturales + resultado.ingles) / 5;
-      datosGrafico.push(resultadoFinal);
-    });
-    return datosGrafico;
-  };
-
   onDestroy(() => {
     if (myChart) {
       myChart.destroy();
@@ -158,16 +98,14 @@
   });
 </script>
 
-{#if isLoading}
-  <p>Cargando...</p>
-{:else if error}
+{#if error}
   <div class="alert alert-danger">{error}</div>
-{:else if resultadoIcfes}
+{:else if resultadosFinales}
   <div class="Información">
-      <h1 class="titulo-con-fondo">Prueba Saber 11</h1>
-    </div>
+    <h1 class="titulo-con-fondo">Valor Agregado</h1>
+  </div>
   <div class="chart-container">
-    <canvas bind:this={canvasElement}></canvas>
+    <canvas bind:this={canvasElement} />
   </div>
 {/if}
 

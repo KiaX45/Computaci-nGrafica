@@ -1,9 +1,10 @@
 <script>
   import { onMount, onDestroy } from "svelte";
   import Chart from "chart.js/auto";
+  import { createEventDispatcher } from 'svelte';
 
   export let codigo = "";
-
+  let dispatch = createEventDispatcher();
   let resultadosEstudiante = null;
   let isLoading = false;
   let error = null;
@@ -20,10 +21,25 @@
         throw new Error("Error en la respuesta de la API");
       }
       resultadosEstudiante = await response.json();
+      
     } catch (e) {
-      error =
-        e.message ||
-        "No se encontraron resultados con el código del estudiante proporcionado";
+      //error = e.message || "No se encontraron resultados con el código del estudiante proporcionado";
+        // "No se encontraron resultados con el código del estudiante proporcionado";
+        //ponemos resultados por defecto para testear
+        //TODO: eliminar los datos 
+        resultadosEstudiante = [
+          {
+            codigoEstudiante: "2018100001",
+            nombreEstudiante: "Juan",
+            apellidoEstudiante: "Perez",
+            comunicacionExamen: 140,
+            razonamientoExamen: 250,
+            lecturaExamen: 270,
+            ciudadanasExamen: 122,
+            inglesExamen: 190,
+          }
+        ];
+        dispatch('enviarDatos', resultadosEstudiante);
     } finally {
       isLoading = false;
     }
@@ -145,6 +161,18 @@
     let promedioLectura = sumaLectura / resultados.length;
     let promedioCiudadanas = sumaCiudadanas / resultados.length;
     let promedioIngles = sumaIngles / resultados.length;
+
+    //creamos un objeto que lamacene los resultados calculados
+    let resultadosFinales= {
+      promedioComunicacion,
+      promedioRazonamiento,
+      promedioLectura,
+      promedioCiudadanas,
+      promedioIngles,
+    }
+
+    dispatch('enviarDatos', resultadosFinales);
+
 
     // Devolver un arreglo con los promedios
     return [
