@@ -1,7 +1,7 @@
 <script>
   import { onMount, onDestroy } from "svelte";
   import Chart from "chart.js/auto";
-  import { createEventDispatcher } from 'svelte';
+  import { createEventDispatcher } from "svelte";
 
   export let codigo = "";
   let dispatch = createEventDispatcher();
@@ -21,25 +21,14 @@
         throw new Error("Error en la respuesta de la API");
       }
       resultadosEstudiante = await response.json();
-      
     } catch (e) {
-      //error = e.message || "No se encontraron resultados con el código del estudiante proporcionado";
-        // "No se encontraron resultados con el código del estudiante proporcionado";
-        //ponemos resultados por defecto para testear
-        //TODO: eliminar los datos 
-        resultadosEstudiante = [
-          {
-            codigoEstudiante: "2018100001",
-            nombreEstudiante: "Juan",
-            apellidoEstudiante: "Perez",
-            comunicacionExamen: 140,
-            razonamientoExamen: 250,
-            lecturaExamen: 270,
-            ciudadanasExamen: 122,
-            inglesExamen: 190,
-          }
-        ];
-        dispatch('enviarDatos', resultadosEstudiante);
+      error =
+        e.message ||
+        "No se encontraron resultados con el código del estudiante proporcionado";
+        console.log("No se encontraron resultados con el código del estudiante proporcionado");
+      // "No se encontraron resultados con el código del estudiante proporcionado";
+      //ponemos resultados por defecto para testear
+      //dispatch("enviarDatos", null);
     } finally {
       isLoading = false;
     }
@@ -163,16 +152,15 @@
     let promedioIngles = sumaIngles / resultados.length;
 
     //creamos un objeto que lamacene los resultados calculados
-    let resultadosFinales= {
+    let resultadosFinales = {
       promedioComunicacion,
       promedioRazonamiento,
       promedioLectura,
       promedioCiudadanas,
       promedioIngles,
-    }
+    };
 
-    dispatch('enviarDatos', resultadosFinales);
-
+    dispatch("enviarDatos", resultadosFinales);
 
     // Devolver un arreglo con los promedios
     return [
@@ -197,7 +185,7 @@
   {#if isLoading}
     <p>Cargando...</p>
   {:else if error}
-    <div class="alert alert-danger">{error}</div>
+   <h2>Error</h2>
   {:else if resultadosEstudiante}
     <!-- Tarjeta de Información del Estudiante -->
     <div class="student-card">

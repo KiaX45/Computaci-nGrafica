@@ -9,12 +9,13 @@
   export let codigo = "";
   let resultadoIcfes = null;
   let isLoading = false;
-  let error = "";
+  let error = null;
   let myChart;
   const dispatch = createEventDispatcher();
 
   //Metodo para cargar los resultados del estudiante
   const cargarResultados = async () => {
+    error = null;
     try {
       isLoading = true;
       const response = await fetch(
@@ -27,23 +28,10 @@
       dispatch('enviarDatos', resultadoIcfes);
     } catch (e) {
       
-      //error =  "No se encontraron resultados con el código del estudiante proporcionado";
+      error =  "No se encontraron resultados con el código del estudiante proporcionado";
         // "No se encontraron resultados con el código del estudiante proporcionado";
         //ponemos resultados por defecto para testear
-        resultadoIcfes = [
-          {
-            codigoEstudiante: "2018100001",
-            nombreEstudiante: "Juan",
-            apellidoEstudiante: "Perez",
-            lectura: 40,
-            matematicas: 100,
-            sociales: 70,
-            naturales: 82,
-            ingles: 90,
-          }
-        ];
-        dispatch('enviarDatos', resultadoIcfes);
-        console.log(resultadoIcfes);
+        //dispatch("enviarDatos", null);
     } finally {
       isLoading = false;
     }

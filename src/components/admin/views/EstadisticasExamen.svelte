@@ -29,13 +29,17 @@
   let resultadosicfes = [];
   const recibirDatosIcfes = (event) => {
     resultadosicfes = event.detail;
+    if(resultadosicfes != null){
+      calcularDatosFinales();
+    }
     //console.log(event.detail);
-    calcularDatosFinales();
   };
   const recibirDatosResultados = (event) => {
     resultados = event.detail;
-    //console.log(event.detail);
-    calcularDatosFinales();
+    //comprobamos si hay o no datos 
+    if(resultados!= null){
+      calcularDatosFinales();
+    }
   };
 
   let resultadosFinales = [];
